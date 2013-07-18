@@ -1,0 +1,26 @@
+name: Easy Warp
+author: NerdsWBNerds
+website: http://nerdspvp.com/
+version: 1.4
+main: com.nerdswbnerds.easywarp.EasyWarp
+commands:
+   warp:
+      description: Show list of warp, or warp to or warp other people to a warp.
+      usage: /<command> <warp> || /<command> <player> <warp>
+      aliases: [ezwarp]
+   listwarps:
+      description: Show list of warp, or warp to or warp other people to a warp.
+      usage: /<command> <page>
+      aliases: [ezwarplist, listwarp, ezlistwarp, warplist, ezlistwarps, warps, ezwarps]
+   setwarp:
+      description: Set a warp at your location.
+      usage: /<command> <warp>
+      aliases: [ezaddwarp, ezsetwarp, addwarp]
+   delwarp:
+      description: Delete warp by name.
+      usage: /<command> <warp>
+      aliases: [ezdeletewarp, ezremovewarp, ezdelwarp, deletewarp, removewarp]
+   easywarp:
+      description: General EasyWarp commands.
+      usage: /<command> <help | reload>
+      aliases: [ew, ez, ezw]

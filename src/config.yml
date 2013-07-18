@@ -1,0 +1,32 @@
+############################
+##  === [ EASY WARP ] === ##
+############################
+
+# Name displayed in messages sent to player from plugin.
+# ex. [server-name] You have been warped.
+server-name: "Easy Warp"
+
+# Delay (in seconds) before a person is warped.
+warp-delay: 10
+
+# If set to true, a person needs permissions for 'easywarp.warp.<warpname>' to use a warp or 'easywarp.warp.*' to use all warps.
+per-warp-permissions: false
+
+# If set to true, a person needs permissions for 'easywarp.sign.use' to use warp signs
+signs-require-permissions: false
+
+# If set to true, a person needs per-warp permissions to use warp signs, even if per-warp-permissions is set to false above.
+# It is recommended you leave this 'false'
+signs-per-warp-permissions: false
+
+# If set to true, a person bypasses any warp delay if the have permissions for 'easywarp.delay.bypass'
+permissions-bypass-delay: false
+
+# If set to true, a person bypasses any warp delay if they are ops.
+ops-bypass-delay: false
+
+# If set to true, when warping another player (/warp player warp) the player will bypass the delay
+warp-other-bypass-delay: true
+
+# If set to true, when warping using a sign the player will bypass the delay
+signs-bypass-delay: true
