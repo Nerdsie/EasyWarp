@@ -118,7 +118,6 @@ public class EWListener implements Listener {
         }
     }
 
-
     public boolean match(String x, String[] split) {
         String xx = ChatColor.stripColor(x);
 
