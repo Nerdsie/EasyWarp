@@ -47,11 +47,17 @@ public class WarpCommand implements CommandExecutor {
                     return true;
                 }
 
+                if (!WarpManager.getAvailable(sender).contains(warpName)) {
+                    sender.sendMessage(ChatColor.RED + "Error: You don't have permission to go to this warp.");
+                    sender.sendMessage(ChatColor.RED + "Help: To list available warps, use /warps");
+                    return true;
+                }
+
                 target = (Player) sender;
             }
 
             if (!WarpManager.isWarp(warpName)) {
-                sender.sendMessage(ChatColor.RED + "Error: Warp not found. /listwarps");
+                sender.sendMessage(ChatColor.RED + "Error: Warp not found. /warps");
                 return true;
             }
 
