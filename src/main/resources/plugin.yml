@@ -1,8 +1,9 @@
-name: Easy Warp
+name: ${project.name}
+main: ${project.groupId}.${project.artifactId}.${project.name}
+version: ${project.version}
+description: ${project.description}
 author: NerdsWBNerds
-website: http://nerdspvp.com/
-version: 1.4
-main: com.nerdswbnerds.easywarp.EasyWarp
+url: ${project.url}
 commands:
    warp:
       description: Show list of warp, or warp to or warp other people to a warp.
