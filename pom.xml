@@ -28,15 +28,6 @@
 
     <dependencies>
         <dependency>
-            <artifactId>Vault</artifactId>
-            <groupId>Vault</groupId>
-            <scope>system</scope>
-            <version>1.0</version>
-            <systemPath>${project.basedir}/../../../Jars and Libs/Vault.jar
-            </systemPath>
-        </dependency>
-
-        <dependency>
             <groupId>org.bukkit</groupId>
             <artifactId>bukkit</artifactId>
             <!-- Bukkit API Version, change if out dated -->
