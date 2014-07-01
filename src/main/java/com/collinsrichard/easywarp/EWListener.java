@@ -86,6 +86,7 @@ public class EWListener implements Listener {
         }
     }
 
+
     @EventHandler
     public void onSignCreate(SignChangeEvent e) {
         Player player = e.getPlayer();
