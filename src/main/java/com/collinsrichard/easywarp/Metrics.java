@@ -154,7 +154,6 @@ public class Metrics {
         return graph;
     }
 
-
     /**
      * Add a Graph object to BukkitMetrics that represents data for the plugin that should be sent to the backend
      *
