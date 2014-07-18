@@ -20,6 +20,8 @@ public class EasyWarp extends JavaPlugin {
         saveConfig();
         reloadConfig();
         Settings.load(this);
+        
+        FileManager fm = new FileManager(this);
 
         FileManager.loadWarps();
 
