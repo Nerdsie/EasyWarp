@@ -1,15 +1,21 @@
 package com.collinsrichard.easywarp.managers;
 
+import com.collinsrichard.easywarp.EasyWarp;
 import com.collinsrichard.easywarp.objects.Warp;
 
 import java.io.*;
 import java.util.ArrayList;
 
 public class FileManager {
+	private static EasyWarp plugin;
+	
+	public FileManager(EasyWarp instance){
+		FileManager.plugin = instance;
+	}
     public static void loadWarps() {
         String fName = "Warps.data";
 
-        File file = new File("plugins/Easy Warp/" + fName);
+        File file = new File(plugin.getDataFolder().getAbsolutePath() + "\\" + fName);
 
         if (file.exists()) {
             try {
@@ -46,10 +52,7 @@ public class FileManager {
             format.add(w.toString());
         }
 
-        File file = new File("plugins/Easy Warp/" + fName);
-
-        new File("plugins/").mkdir();
-        new File("plugins/Easy Warp/").mkdir();
+        File file = new File(plugin.getDataFolder().getAbsolutePath() +"\\" + fName);
 
         if (!file.exists()) {
             try {

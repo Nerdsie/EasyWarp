@@ -11,6 +11,11 @@ import java.util.ArrayList;
 
 public class Helper {
     public static ArrayList<WarpTimer> warpTimers = new ArrayList<WarpTimer>();
+    private static EasyWarp plugin;
+    
+    public Helper(EasyWarp instance){
+    	Helper.plugin = instance;
+    }
 
     public static String parse(String s) {
         String message = s;
@@ -85,7 +90,7 @@ public class Helper {
         }
 
         WarpTimer warpTimer = new WarpTimer(player, to);
-        warpTimer.id = Bukkit.getScheduler().scheduleSyncDelayedTask(Bukkit.getPluginManager().getPlugin("Easy Warp"), warpTimer, 20L * Settings.delay);
+        warpTimer.id = Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, warpTimer, 20L * Settings.delay);
 
         warpTimers.add(warpTimer);
     }
@@ -119,6 +124,6 @@ public class Helper {
     }
 
     public static Plugin getPlugin() {
-        return Bukkit.getPluginManager().getPlugin("Easy Warp");
+        return plugin;
     }
 }
