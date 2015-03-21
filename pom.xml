@@ -13,27 +13,18 @@
     <url>http://collinsrichard.com/</url>
     <description>A useful warp plugin.</description>
 
-
     <groupId>com.collinsrichard</groupId>
     <artifactId>easywarp</artifactId>
-    <version>2.0.1</version>
+    <version>2.0.2</version>
     <packaging>jar</packaging>
-
-    <repositories>
-        <repository>
-            <id>bukkit-repo</id>
-            <url>http://repo.bukkit.org/content/groups/public/</url>
-        </repository>
-    </repositories>
 
     <dependencies>
         <dependency>
-            <groupId>org.bukkit</groupId>
-            <artifactId>bukkit</artifactId>
-            <!-- Bukkit API Version, change if out dated -->
-            <version>1.7.9-R0.1-SNAPSHOT</version>
-            <type>jar</type>
-            <scope>provided</scope>
+            <artifactId>Bukkit</artifactId>
+            <groupId>Bukkit</groupId>
+            <version>1.8.3</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/../../Java/Minecraft/Jars and Libs/bukkit.jar</systemPath>
         </dependency>
     </dependencies>
 

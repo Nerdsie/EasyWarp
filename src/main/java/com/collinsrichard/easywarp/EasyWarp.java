@@ -7,7 +7,11 @@ import org.bukkit.plugin.java.JavaPlugin;
 import java.io.IOException;
 
 public class EasyWarp extends JavaPlugin {
+    public static String name = "";
+
     public void onEnable() {
+        name = this.getName();
+
         getServer().getPluginManager().registerEvents(new EWListener(this), this);
 
         try {

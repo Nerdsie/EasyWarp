@@ -85,7 +85,7 @@ public class Helper {
         }
 
         WarpTimer warpTimer = new WarpTimer(player, to);
-        warpTimer.id = Bukkit.getScheduler().scheduleSyncDelayedTask(Bukkit.getPluginManager().getPlugin("Easy Warp"), warpTimer, 20L * Settings.delay);
+        warpTimer.id = Bukkit.getScheduler().scheduleSyncDelayedTask(getPlugin(), warpTimer, 20L * Settings.delay);
 
         warpTimers.add(warpTimer);
     }
@@ -119,6 +119,6 @@ public class Helper {
     }
 
     public static Plugin getPlugin() {
-        return Bukkit.getPluginManager().getPlugin("Easy Warp");
+        return Bukkit.getPluginManager().getPlugin(EasyWarp.name);
     }
 }
