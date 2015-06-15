@@ -22,9 +22,9 @@
         <dependency>
             <artifactId>Bukkit</artifactId>
             <groupId>Bukkit</groupId>
-            <version>1.8.3</version>
+            <version>1.6.4</version>
             <scope>system</scope>
-            <systemPath>${project.basedir}/../../Jars and Libs/bukkit.jar</systemPath>
+            <systemPath>${project.basedir}/../../../../../spigot.jar</systemPath>
         </dependency>
     </dependencies>
 
