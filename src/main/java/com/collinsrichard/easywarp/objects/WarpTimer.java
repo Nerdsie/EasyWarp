@@ -19,8 +19,7 @@ public class WarpTimer implements Runnable {
 	public void run() {
 		Helper.stopWarping(player);
 
-		player.teleport(warp.getLocation());
-		player.sendMessage(Helper.getPrefix() + "You have been warped to " + ChatColor.RED + warp.getName());
+        Helper.warp(player, warp);
 	}
 
 }

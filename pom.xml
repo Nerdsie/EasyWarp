@@ -15,7 +15,7 @@
 
     <groupId>com.collinsrichard</groupId>
     <artifactId>easywarp</artifactId>
-    <version>2.0.2</version>
+    <version>3.1</version>
     <packaging>jar</packaging>
 
     <dependencies>
@@ -24,7 +24,7 @@
             <groupId>Bukkit</groupId>
             <version>1.8.3</version>
             <scope>system</scope>
-            <systemPath>${project.basedir}/../../Java/Minecraft/Jars and Libs/bukkit.jar</systemPath>
+            <systemPath>${project.basedir}/../../Jars and Libs/bukkit.jar</systemPath>
         </dependency>
     </dependencies>
 

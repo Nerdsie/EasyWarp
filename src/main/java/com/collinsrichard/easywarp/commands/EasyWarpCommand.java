@@ -8,6 +8,8 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 
+import java.util.HashMap;
+
 public class EasyWarpCommand implements CommandExecutor {
 
     public boolean onCommand(CommandSender sender, Command cmd, String label, String args[]) {
@@ -15,9 +17,14 @@ public class EasyWarpCommand implements CommandExecutor {
             return false;
         }
 
+        String perms = "easywarp.command.reload";
+
         if (args[0].equalsIgnoreCase("reload")) {
-            if (!sender.hasPermission("easywarp.command.reload")) {
-                sender.sendMessage(ChatColor.RED + "Error: You need the 'easywarp.command.reload' permission node to do this.");
+            if (!sender.hasPermission(perms)) {
+                HashMap<String, String> values = new HashMap<String, String>();
+                values.put("node", perms);
+
+                Helper.sendParsedMessage(sender, Settings.getMessage("error.no-permission"), values);
                 return true;
             }
 
@@ -26,7 +33,10 @@ public class EasyWarpCommand implements CommandExecutor {
             Helper.getPlugin().reloadConfig();
             Settings.loadSettings(Helper.getPlugin());
 
-            sender.sendMessage(Helper.getPrefix() + "Config reloaded.");
+            HashMap<String, String> values = new HashMap<String, String>();
+            values.put("info", "");
+
+            Helper.sendParsedMessage(sender, Settings.getMessage("config.reloaded"), values);
         }
 
         return true;

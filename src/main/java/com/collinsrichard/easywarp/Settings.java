@@ -2,6 +2,10 @@ package com.collinsrichard.easywarp;
 
 import org.bukkit.plugin.Plugin;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Set;
 import java.util.logging.Level;
 
 public class Settings {
@@ -12,7 +16,8 @@ public class Settings {
 	public static boolean permsBypassDelay = false;
 	public static boolean opsBypassDelay = false;
 	public static boolean warpOtherBypassDelay = false;
-	public static boolean signsBypassDelay = false;
+    public static boolean signsBypassDelay = false;
+    public static boolean canOverwrite = false;
 	public static String prefix = "&3[&6EasyWarp&3]";
 
 	public static void load(EasyWarp plugin) {
@@ -29,9 +34,25 @@ public class Settings {
 			Settings.permsBypassDelay = plugin.getConfig().getBoolean("permissions-bypass-delay");
 			Settings.opsBypassDelay = plugin.getConfig().getBoolean("ops-bypass-delay");
 			Settings.warpOtherBypassDelay = plugin.getConfig().getBoolean("warp-other-bypass-delay");
-			Settings.signsBypassDelay = plugin.getConfig().getBoolean("signsr-bypass-delay");
+            Settings.signsBypassDelay = plugin.getConfig().getBoolean("signs-bypass-delay");
+            Settings.canOverwrite = plugin.getConfig().getBoolean("allow-warp-overwrite");
+
 		} catch (Exception e) {
-			plugin.getLogger().log(Level.WARNING, "Error loading config: using defaults.");
+			plugin.getLogger().log(Level.SEVERE, "Error loading config: disabling.");
+            plugin.getPluginLoader().disablePlugin(plugin);
 		}
 	}
+
+    public static List<String> getMessage(String search) {
+        Plugin plugin = Helper.getPlugin();
+
+        List<String> toReturn = plugin.getConfig().getStringList("messages." + search);
+
+        if(toReturn == null || toReturn.isEmpty()){
+            toReturn = new ArrayList<String>();
+            toReturn.add(plugin.getConfig().getString("messages." + search));
+        }
+
+        return toReturn;
+    }
 }

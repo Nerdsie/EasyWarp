@@ -14,6 +14,8 @@ import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 
+import java.util.HashMap;
+
 public class EWListener implements Listener {
     public EasyWarp plugin;
 
@@ -43,7 +45,8 @@ public class EWListener implements Listener {
         if (Helper.isWarping(player)) {
             Helper.stopWarping(player);
 
-            player.sendMessage(ChatColor.RED + "Delayed warp has been cancelled");
+            HashMap<String, String> values = new HashMap<String, String>();
+            Helper.sendParsedMessage(player, Settings.getMessage("warp.cancelled"), values);
         }
     }
 
@@ -68,18 +71,25 @@ public class EWListener implements Listener {
                         return;
                     }
 
-                    if (Settings.signsReqPerms && !player.hasPermission("easywarp.sign.use")) {
-                        player.sendMessage(ChatColor.RED + "Error: You need the 'easywarp.signs.use' permission node to do this.");
+                    String perms = "easywarp.sign.use";
+                    if (Settings.signsReqPerms && !player.hasPermission(perms)) {
+                        HashMap<String, String> values = new HashMap<String, String>();
+                        values.put("node", perms);
+
+                        Helper.sendParsedMessage(player, Settings.getMessage("error.no-permission"), values);
                         return;
                     }
 
-                    if (Settings.signsPerWarpPerms && !player.hasPermission("easywarp.warp." + warpN)) {
-                        player.sendMessage(ChatColor.RED + "Error: You need the 'easywarp.warp." + warpN + "' permission node to do this.");
+                    perms = "easywarp.warp." + warpN;
+                    if (Settings.signsPerWarpPerms && !player.hasPermission(perms)) {
+                        HashMap<String, String> values = new HashMap<String, String>();
+                        values.put("node", perms);
+
+                        Helper.sendParsedMessage(player, Settings.getMessage("error.no-permission"), values);
                         return;
                     }
 
                     Warp warp = WarpManager.getWarp(warpN);
-
                     Helper.warpSign(player, warp);
                 }
             }
@@ -114,7 +124,8 @@ public class EWListener implements Listener {
                 e.setLine(2, ChatColor.DARK_GRAY + e.getLine(2));
                 e.setLine(3, ChatColor.DARK_GRAY + e.getLine(3));
 
-                player.sendMessage(Helper.getPrefix() + "You have created a warp sign.");
+                HashMap<String, String> values = new HashMap<String, String>();
+                Helper.sendParsedMessage(player, Settings.getMessage("sign.create"), values);
             }
         }
     }

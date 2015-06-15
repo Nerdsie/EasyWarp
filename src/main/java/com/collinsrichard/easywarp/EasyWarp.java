@@ -21,7 +21,6 @@ public class EasyWarp extends JavaPlugin {
         }
 
         saveDefaultConfig();
-        saveConfig();
         reloadConfig();
         Settings.load(this);
 

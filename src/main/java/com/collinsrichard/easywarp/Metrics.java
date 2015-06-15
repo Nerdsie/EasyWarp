@@ -58,7 +58,6 @@ import java.util.logging.Level;
 import java.util.zip.GZIPOutputStream;
 
 public class Metrics {
-
     /**
      * The current revision number
      */

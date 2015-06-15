@@ -10,6 +10,61 @@ server-name: "&3[&6EasyWarp&3]"
 warp-delay: 10
 
 
+#============================================================================================================================#
+#============================================================================================================================#
+#============================================================================================================================#
+
+
+#Variables:
+#{server}
+#{delay}
+#{name}
+#{display}
+#{node}
+#{command}
+
+#{page}
+#{pages}
+
+#{target}
+
+#Messages to be sent
+messages:
+  warp:
+    other: "{server}&a You have warped &c{target}&a to &c{warp}."
+    cancelled: "&cDelayed warp has been cancelled"
+    completed: "{server}&a You have been warped to &c{warp}."
+    delayed: "{server}&a You will be warped in &c{delay}&a seconds."
+    removed: "{server}&a The warp &c{warp} &ahas been removed."
+    set: "{server}&a The warp &c{warp} &ahas been set."
+    list: "{server}&a Available Warps&c ({page}/{pages})"
+    no-permission:
+    - "&cError: You do not have permission to use this warp."
+    - "&c -> To list available warps, use /warps"
+  error:
+    no-warp:
+    - "&cError: This warp does not exist."
+    - "&c -> To list available warps, use /warps"
+    no-warp-given:
+    - "&cError: /warp <warp> || /warp <player> <warp>"
+    - "&c -> To list available warps, use /warps"
+    no-permission: "$cError: You need the '{node}' permission node to do this."
+    no-page: "&cError: /{command} <page #>"
+    no-player: "&cError: Player not found."
+    not-player: "&cError: You must be a player to do this."
+    cannot-overwrite: "&cError: This warp already exists."
+  config:
+    reloaded: "{server}&a Config reloaded."
+
+#Example of multi-lined message
+#  example:
+#  - This line comes first
+#  - Then this one
+
+
+#============================================================================================================================#
+#============================================================================================================================#
+#============================================================================================================================#
 
 
 # If set to true, a person needs permissions for 'easywarp.warp.<warpname>' to use a warp or 'easywarp.warp.*' to use all warps.
@@ -34,11 +89,5 @@ warp-other-bypass-delay: true
 # If set to true, when warping using a sign the player will bypass the delay
 signs-bypass-delay: true
 
-
-
-
-# All customizable messages, use {prefix} to insert the server-name, use {name} to insert a players name, use {warp} to insert the warp name.
-warp-cancelled: "&cDelayed warp has been cancelled"
-successful-warp: "{prefix} &aYou have been warped to &c{warp}."
-warp-removed: "{prefix} &aThe warp &c{warp} &ahas been removed."
-warp-set: "{prefix} &aThe warp &c{warp} &ahas been set."
+# If set to false, you will receive an error when trying to /setwarp an existing warp
+allow-warp-overwrite: false

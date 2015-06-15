@@ -1,6 +1,7 @@
 package com.collinsrichard.easywarp.commands;
 
 import com.collinsrichard.easywarp.Helper;
+import com.collinsrichard.easywarp.Settings;
 import com.collinsrichard.easywarp.managers.FileManager;
 import com.collinsrichard.easywarp.managers.WarpManager;
 import org.bukkit.ChatColor;
@@ -9,35 +10,48 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import java.util.HashMap;
+
 public class SetWarpCommand implements CommandExecutor {
 
     public boolean onCommand(CommandSender sender, Command cmd, String label, String args[]) {
-        if (cmd.getName().equalsIgnoreCase("setwarp")) {
-            if (!(sender instanceof Player)) {
-                sender.sendMessage(ChatColor.RED + "Error: You must be a player to do this.");
-                return true;
-            }
+        if (args.length == 0) {
+            return false;
+        }
 
-            if (WarpManager.isWarp(args[0])) {
-                sender.sendMessage(ChatColor.RED + "Error: This warp already exists. /delwarp");
-                return true;
-            }
+        if (!(sender instanceof Player)) {
+            HashMap<String, String> values = new HashMap<String, String>();
 
-            if (!sender.hasPermission("easywarp.command.setwarp")) {
-                sender.sendMessage(ChatColor.RED + "Error: You need the 'easywarp.command.setwarp' permission node to do this.");
-                return true;
-            }
-
-            Player player = (Player) sender;
-
-            WarpManager.addWarp(args[0], player.getLocation());
-
-            player.sendMessage(Helper.getPrefix() + "The warp " + ChatColor.RED + args[0] + ChatColor.GREEN + " has been added.");
-            FileManager.saveWarps();
-
+            Helper.sendParsedMessage(sender, Settings.getMessage("error.not-player"), values);
             return true;
         }
 
-        return false;
+        if (WarpManager.isWarp(args[0]) && !Settings.canOverwrite) {
+            HashMap<String, String> values = new HashMap<String, String>();
+
+            Helper.sendParsedMessage(sender, Settings.getMessage("error.cannot-overwrite"), values);
+            return true;
+        }
+
+        String perms = "easywarp.command.setwarp";
+        if (!sender.hasPermission(perms)) {
+            HashMap<String, String> values = new HashMap<String, String>();
+            values.put("node", perms);
+
+            Helper.sendParsedMessage(sender, Settings.getMessage("error.no-permission"), values);
+            return true;
+        }
+
+        Player player = (Player) sender;
+
+        WarpManager.addWarp(args[0], player.getLocation());
+        FileManager.saveWarps();
+
+        HashMap<String, String> values = new HashMap<String, String>();
+        values.put("warp", args[0]);
+
+        Helper.sendParsedMessage(player, Settings.getMessage("warp.set"), values);
+
+        return true;
     }
 }
