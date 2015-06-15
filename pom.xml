@@ -24,7 +24,7 @@
             <groupId>Bukkit</groupId>
             <version>1.6.4</version>
             <scope>system</scope>
-            <systemPath>${project.basedir}/../../../../../spigot.jar</systemPath>
+            <systemPath>${project.basedir}/../../../../../Minecraft/Versions/1.6.4/spigot.jar</systemPath>
         </dependency>
     </dependencies>
 
