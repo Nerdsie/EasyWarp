@@ -141,24 +141,26 @@ public class Helper {
         for (String msg : messages) {
             String message = msg;
 
-            for (String key : values.keySet()) {
-                message = message.replaceAll(Pattern.quote("{" + key + "}"), values.get(key));
+            if (!message.equalsIgnoreCase("")) {
+                for (String key : values.keySet()) {
+                    message = message.replaceAll(Pattern.quote("{" + key + "}"), values.get(key));
+                }
+
+                String playerDisplay = "CONSOLE";
+                String player = "CONSOLE";
+
+                if (sender instanceof Player) {
+                    playerDisplay = ((Player) sender).getDisplayName();
+                    player = sender.getName();
+                }
+
+                message = message.replaceAll(Pattern.quote("{server}"), getPrefix());
+                message = message.replaceAll(Pattern.quote("{name}"), player);
+                message = message.replaceAll(Pattern.quote("{display}"), playerDisplay);
+                message = message.replaceAll(Pattern.quote("{delay}"), Settings.delay + "");
+
+                sender.sendMessage(Helper.parse(message));
             }
-
-            String playerDisplay = "CONSOLE";
-            String player = "CONSOLE";
-
-            if (sender instanceof Player) {
-                playerDisplay = ((Player) sender).getDisplayName();
-                player = sender.getName();
-            }
-
-            message = message.replaceAll(Pattern.quote("{server}"), getPrefix());
-            message = message.replaceAll(Pattern.quote("{name}"), player);
-            message = message.replaceAll(Pattern.quote("{display}"), playerDisplay);
-            message = message.replaceAll(Pattern.quote("{delay}"), Settings.delay + "");
-
-            sender.sendMessage(Helper.parse(message));
         }
     }
 }
