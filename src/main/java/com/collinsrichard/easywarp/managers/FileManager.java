@@ -1,19 +1,32 @@
 package com.collinsrichard.easywarp.managers;
 
 import com.collinsrichard.easywarp.EasyWarp;
+import com.collinsrichard.easywarp.Helper;
 import com.collinsrichard.easywarp.objects.Warp;
+import org.bukkit.Bukkit;
+import org.bukkit.Location;
+import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.configuration.file.YamlConfiguration;
 
 import java.io.*;
 import java.util.ArrayList;
 
 public class FileManager {
-    public static File getWarpsFile(){
+    private FileConfiguration warpConfig = null;
+    private File warpConfigFile = null;
+
+    public File getOldFile() {
         String fName = "warps.data";
         return new File("plugins/" + EasyWarp.name + "/" + fName);
     }
 
-    public static void loadWarps() {
-        File file = getWarpsFile();
+    public FileManager() {
+        warpConfigFile = new File(Helper.getPlugin().getDataFolder(), "warps.yml");
+        warpConfig = YamlConfiguration.loadConfiguration(warpConfigFile);
+    }
+
+    public void loadWarpsOld() {
+        File file = getOldFile();
 
         if (file.exists()) {
             try {
@@ -41,34 +54,55 @@ public class FileManager {
         }
     }
 
-    public static void saveWarps() {
-        File file = getWarpsFile();
-
-        ArrayList<String> format = new ArrayList<String>();
-
-        for (Warp w : WarpManager.getWarpObjects()) {
-            format.add(w.toString());
+    public void loadWarps() {
+        if (getOldFile().exists()) {
+            loadWarpsOld();
+            getOldFile().delete();
+            return;
         }
 
-        new File("plugins/").mkdir();
-        new File("plugins/" + EasyWarp.name + "/").mkdir();
+        ArrayList<String> list = Helper.getChildren(warpConfig, "warps");
 
-        if (!file.exists()) {
-            try {
-                file.createNewFile();
-            } catch (IOException e) {
-                System.out.println("Easy Warp had an error saving warps.");
+        for (String name : list) {
+            String worldName = warpConfig.getString("warps." + name + ".world");
+            double x = warpConfig.getDouble("warps." + name + ".x");
+            double y = warpConfig.getDouble("warps." + name + ".y");
+            double z = warpConfig.getDouble("warps." + name + ".z");
+
+            Location warpLocation = new Location(Bukkit.getWorld(worldName), x, y, z);
+
+            if (warpConfig.contains("yaw")) {
+                Float yaw = Float.parseFloat(warpConfig.getString("warps." + name + ".yaw"));
+                warpLocation.setYaw(yaw);
             }
-        }
 
-        try {
-            ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(file.getAbsolutePath()));
-            oos.writeObject(format);
-            oos.flush();
-            oos.close();
-        } catch (Exception e) {
-            System.out.println("Easy Warp had an error saving warps.");
+            if (warpConfig.contains("pitch")) {
+                Float pitch = Float.parseFloat(warpConfig.getString("warps." + name + ".pitch"));
+                warpLocation.setYaw(pitch);
+            }
+
+            Warp warp = new Warp(name, warpLocation);
+            WarpManager.addWarp(warp);
         }
     }
 
+    public void saveWarps() {
+        warpConfigFile.delete();
+
+        for (Warp warp : WarpManager.getWarps()) {
+            warpConfig.set("warps." + warp.getName() + ".world", warp.getLocation().getWorld().getName());
+            warpConfig.set("warps." + warp.getName() + ".x", warp.getLocation().getX());
+            warpConfig.set("warps." + warp.getName() + ".y", warp.getLocation().getX());
+            warpConfig.set("warps." + warp.getName() + ".z", warp.getLocation().getX());
+
+            warpConfig.set("warps." + warp.getName() + ".yaw", warp.getLocation().getYaw());
+            warpConfig.set("warps." + warp.getName() + ".pitch", warp.getLocation().getPitch());
+        }
+
+        try {
+            warpConfig.save(warpConfigFile);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }

@@ -8,6 +8,7 @@ import java.io.IOException;
 
 public class EasyWarp extends JavaPlugin {
     public static String name = "";
+    private FileManager fileManager;
 
     public void onEnable() {
         name = this.getName();
@@ -23,8 +24,8 @@ public class EasyWarp extends JavaPlugin {
         saveDefaultConfig();
         reloadConfig();
         Settings.load(this);
-
-        FileManager.loadWarps();
+        fileManager = new FileManager();
+        fileManager.loadWarps();
 
         getCommand("delwarp").setExecutor(new DeleteWarpCommand());
         getCommand("easywarp").setExecutor(new EasyWarpCommand());
@@ -34,6 +35,6 @@ public class EasyWarp extends JavaPlugin {
     }
 
     public void onDisable() {
-        FileManager.saveWarps();
+        fileManager.saveWarps();
     }
 }

@@ -88,7 +88,7 @@ public class WarpManager {
         return ret;
     }
 
-    public static ArrayList<Warp> getWarpObjects() {
+    public static ArrayList<Warp> getWarps() {
         ArrayList<Warp> ret = new ArrayList<Warp>();
 
         Iterator it = warps.entrySet().iterator();
