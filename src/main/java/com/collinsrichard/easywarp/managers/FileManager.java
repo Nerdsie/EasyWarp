@@ -58,6 +58,7 @@ public class FileManager {
         if (getOldFile().exists()) {
             loadWarpsOld();
             getOldFile().delete();
+            saveWarps();
             return;
         }
 
