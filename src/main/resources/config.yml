@@ -42,6 +42,7 @@ messages:
     - "&cError: You do not have permission to use this warp."
     - "&c -> To list available warps, use /warps"
   error:
+    illegal-char: "&cError: Your warp contains an unusable character."
     no-warp:
     - "&cError: This warp does not exist."
     - "&c -> To list available warps, use /warps"

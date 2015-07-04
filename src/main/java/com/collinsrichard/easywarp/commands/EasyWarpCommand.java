@@ -1,5 +1,6 @@
 package com.collinsrichard.easywarp.commands;
 
+import com.collinsrichard.easywarp.EasyWarp;
 import com.collinsrichard.easywarp.Helper;
 import com.collinsrichard.easywarp.Settings;
 import com.collinsrichard.easywarp.managers.FileManager;
@@ -28,7 +29,7 @@ public class EasyWarpCommand implements CommandExecutor {
                 return true;
             }
 
-            FileManager.saveWarps();
+            EasyWarp.fileManager.saveWarps();
 
             Helper.getPlugin().reloadConfig();
             Settings.loadSettings(Helper.getPlugin());

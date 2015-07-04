@@ -8,7 +8,7 @@ import java.io.IOException;
 
 public class EasyWarp extends JavaPlugin {
     public static String name = "";
-    private FileManager fileManager;
+    public static FileManager fileManager;
 
     public void onEnable() {
         name = this.getName();

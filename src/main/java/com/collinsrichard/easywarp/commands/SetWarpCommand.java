@@ -1,5 +1,6 @@
 package com.collinsrichard.easywarp.commands;
 
+import com.collinsrichard.easywarp.EasyWarp;
 import com.collinsrichard.easywarp.Helper;
 import com.collinsrichard.easywarp.Settings;
 import com.collinsrichard.easywarp.managers.FileManager;
@@ -42,13 +43,20 @@ public class SetWarpCommand implements CommandExecutor {
             return true;
         }
 
+        String warpName = args[0];
         Player player = (Player) sender;
 
-        WarpManager.addWarp(args[0], player.getLocation());
-        FileManager.saveWarps();
 
         HashMap<String, String> values = new HashMap<String, String>();
-        values.put("warp", args[0]);
+        values.put("warp", warpName);
+
+        if (warpName.contains(".")) {
+            Helper.sendParsedMessage(player, Settings.getMessage("error.illegal-char"), values);
+            return true;
+        }
+
+        WarpManager.addWarp(warpName, player.getLocation());
+        EasyWarp.fileManager.saveWarps();
 
         Helper.sendParsedMessage(player, Settings.getMessage("warp.set"), values);
 

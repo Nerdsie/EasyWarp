@@ -1,5 +1,6 @@
 package com.collinsrichard.easywarp.commands;
 
+import com.collinsrichard.easywarp.EasyWarp;
 import com.collinsrichard.easywarp.Helper;
 import com.collinsrichard.easywarp.Settings;
 import com.collinsrichard.easywarp.managers.FileManager;
@@ -41,7 +42,7 @@ public class DeleteWarpCommand implements CommandExecutor {
             Helper.sendParsedMessage(sender, Settings.getMessage("warp.removed"), values);
 
             WarpManager.removeWarp(remove);
-            FileManager.saveWarps();
+            EasyWarp.fileManager.saveWarps();
 
             return true;
         }
