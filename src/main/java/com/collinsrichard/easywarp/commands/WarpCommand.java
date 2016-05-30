@@ -81,7 +81,7 @@ public class WarpCommand implements CommandExecutor {
                     return true;
                 }
 
-                if (!WarpManager.getAvailable(sender).contains(warpName)) {
+                if (!WarpManager.getAvailable(sender).contains(warpName.toLowerCase())) {
                     HashMap<String, String> values = new HashMap<String, String>();
                     values.put("node", perms);
                     values.put("warp", warpName);

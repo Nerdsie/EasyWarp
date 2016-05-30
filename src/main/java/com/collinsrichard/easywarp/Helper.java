@@ -70,8 +70,12 @@ public class Helper {
 
         sendParsedMessage(player, Settings.getMessage("warp.completed"), values);
 
-        if (!to.getLocation().getChunk().isLoaded()) {
-            to.getLocation().getChunk().load();
+        try {
+            if (!to.getLocation().getChunk().isLoaded()) {
+                to.getLocation().getChunk().load();
+            }
+        }catch(Exception e){
+
         }
 
         player.teleport(to.getLocation());

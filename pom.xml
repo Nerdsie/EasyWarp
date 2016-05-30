@@ -15,16 +15,16 @@
 
     <groupId>com.collinsrichard</groupId>
     <artifactId>easywarp</artifactId>
-    <version>3.3</version>
+    <version>3.4</version>
     <packaging>jar</packaging>
 
     <dependencies>
         <dependency>
             <artifactId>Bukkit</artifactId>
             <groupId>Bukkit</groupId>
-            <version>1.6.4</version>
+            <version>1.9.4</version>
             <scope>system</scope>
-            <systemPath>${project.basedir}/../../../../../Minecraft/Versions/1.6.4/spigot.jar</systemPath>
+            <systemPath>D:/Minecraft/BuildTools/spigot-1.9.4.jar</systemPath>
         </dependency>
     </dependencies>
 
