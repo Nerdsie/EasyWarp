@@ -93,8 +93,8 @@ public class FileManager {
         for (Warp warp : WarpManager.getWarps()) {
             warpConfig.set("warps." + warp.getName() + ".world", warp.getLocation().getWorld().getName());
             warpConfig.set("warps." + warp.getName() + ".x", warp.getLocation().getX());
-            warpConfig.set("warps." + warp.getName() + ".y", warp.getLocation().getX());
-            warpConfig.set("warps." + warp.getName() + ".z", warp.getLocation().getX());
+            warpConfig.set("warps." + warp.getName() + ".y", warp.getLocation().getY());
+            warpConfig.set("warps." + warp.getName() + ".z", warp.getLocation().getZ());
 
             warpConfig.set("warps." + warp.getName() + ".yaw", warp.getLocation().getYaw());
             warpConfig.set("warps." + warp.getName() + ".pitch", warp.getLocation().getPitch());
