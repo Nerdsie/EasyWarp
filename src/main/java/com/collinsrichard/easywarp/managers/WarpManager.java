@@ -1,6 +1,5 @@
 package com.collinsrichard.easywarp.managers;
 
-import com.collinsrichard.easywarp.EasyWarp;
 import com.collinsrichard.easywarp.Settings;
 import com.collinsrichard.easywarp.objects.Warp;
 import org.bukkit.Bukkit;
@@ -24,7 +23,6 @@ public class WarpManager {
     public static void addWarp(Warp warp) {
         if (warp != null && !isWarp(warp.getName())) {
             warps.put(warp.getName().toLowerCase(), warp);
-            EasyWarp.fileManager.saveWarps();
         }
     }
 
@@ -39,7 +37,6 @@ public class WarpManager {
     public static void removeWarp(Warp warp) {
         if (isWarp(warp)) {
             warps.remove(warp.getName().toLowerCase());
-            EasyWarp.fileManager.saveWarps();
         }
     }
 
