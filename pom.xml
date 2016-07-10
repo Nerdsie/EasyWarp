@@ -15,7 +15,7 @@
 
     <groupId>com.collinsrichard</groupId>
     <artifactId>easywarp</artifactId>
-    <version>3.6</version>
+    <version>3.8</version>
     <packaging>jar</packaging>
 
     <dependencies>

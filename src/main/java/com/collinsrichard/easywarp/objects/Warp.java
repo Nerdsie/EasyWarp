@@ -1,10 +1,13 @@
 package com.collinsrichard.easywarp.objects;
 
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 
 public class Warp {
-	private String name;
-	private Location location;
+	private String name = "";
+	private String worldName = "";
+	private double x = 0, y = 0, z = 0;
+	private float pitch = 0F, yaw = 0F;
 
 	public Warp(String n, Location l) {
 		setName(n);
@@ -16,7 +19,12 @@ public class Warp {
 	}
 
 	public void setLocation(Location l) {
-		location = l;
+		worldName = l.getWorld().getName();
+		x = l.getX();
+		y = l.getY();
+		z = l.getZ();
+		pitch = l.getPitch();
+		yaw = l.getYaw();
 	}
 
 	public String getName() {
@@ -24,7 +32,7 @@ public class Warp {
 	}
 
 	public Location getLocation() {
-		return location;
+		return new Location(Bukkit.getWorld(worldName), x, y, z, yaw, pitch);
 	}
 
 	public String toString() {

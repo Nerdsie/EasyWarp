@@ -102,7 +102,7 @@ public class FileManager {
 
             if (warpConfig.contains("warps." + name + ".pitch")) {
                 Float pitch = Float.parseFloat(warpConfig.getString("warps." + name + ".pitch"));
-                warpLocation.setYaw(pitch);
+                warpLocation.setPitch(pitch);
             }
 
             Warp warp = new Warp(name, warpLocation);
