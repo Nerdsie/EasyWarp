@@ -14,6 +14,24 @@ public class Warp {
 		setLocation(l);
 	}
 
+	public Warp (String n, String world, double xx, double yy, double zz){
+		setName(n);
+		worldName = world;
+		x = xx;
+		y = yy;
+		z = zz;
+	}
+
+	public Warp (String n, String world, double xx, double yy, double zz, float yyaw, float ppitch){
+		setName(n);
+		worldName = world;
+		x = xx;
+		y = yy;
+		z = zz;
+		yaw = yyaw;
+		pitch = ppitch;
+	}
+
 	public void setName(String s) {
 		name = s;
 	}

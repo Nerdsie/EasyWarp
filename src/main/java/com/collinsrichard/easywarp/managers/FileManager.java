@@ -3,8 +3,6 @@ package com.collinsrichard.easywarp.managers;
 import com.collinsrichard.easywarp.EasyWarp;
 import com.collinsrichard.easywarp.Helper;
 import com.collinsrichard.easywarp.objects.Warp;
-import org.bukkit.Bukkit;
-import org.bukkit.Location;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 
@@ -92,20 +90,17 @@ public class FileManager {
             double x = warpConfig.getDouble("warps." + name + ".x");
             double y = warpConfig.getDouble("warps." + name + ".y");
             double z = warpConfig.getDouble("warps." + name + ".z");
-
-            Location warpLocation = new Location(Bukkit.getWorld(worldName), x, y, z);
+            Float yaw = 0F, pitch = 0F;
 
             if (warpConfig.contains("warps." + name + ".yaw")) {
-                Float yaw = Float.parseFloat(warpConfig.getString("warps." + name + ".yaw"));
-                warpLocation.setYaw(yaw);
+                yaw = Float.parseFloat(warpConfig.getString("warps." + name + ".yaw"));
             }
 
             if (warpConfig.contains("warps." + name + ".pitch")) {
-                Float pitch = Float.parseFloat(warpConfig.getString("warps." + name + ".pitch"));
-                warpLocation.setPitch(pitch);
+                pitch = Float.parseFloat(warpConfig.getString("warps." + name + ".pitch"));
             }
 
-            Warp warp = new Warp(name, warpLocation);
+            Warp warp = new Warp(name, worldName, x, y, z, yaw, pitch);
             WarpManager.addWarp(warp);
         }
     }
