@@ -53,7 +53,7 @@ public class EWListener implements Listener {
     @EventHandler
     public void onInteract(PlayerInteractEvent e) {
         if (e.getAction() == Action.RIGHT_CLICK_BLOCK) {
-            if (e.getClickedBlock().getType() == Material.WALL_SIGN || e.getClickedBlock().getType() == Material.SIGN_POST || e.getClickedBlock().getType() == Material.SIGN) {
+            if (e.getClickedBlock().getState() instanceof Sign) {
                 Player player = e.getPlayer();
 
                 Sign sign = (Sign) e.getClickedBlock().getState();

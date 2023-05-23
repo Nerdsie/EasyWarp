@@ -15,16 +15,24 @@
 
     <groupId>com.collinsrichard</groupId>
     <artifactId>easywarp</artifactId>
-    <version>3.8</version>
+    <version>3.9</version>
     <packaging>jar</packaging>
 
+    <repositories>
+        <!-- This adds the Spigot Maven repository to the build -->
+        <repository>
+            <id>spigot-repo</id>
+            <url>https://hub.spigotmc.org/nexus/content/repositories/snapshots/</url>
+        </repository>
+    </repositories>
+
     <dependencies>
+        <!--This adds the Spigot API artifact to the build -->
         <dependency>
-            <artifactId>Bukkit</artifactId>
-            <groupId>Bukkit</groupId>
-            <version>1.9.4</version>
-            <scope>system</scope>
-            <systemPath>D:/Minecraft/BuildTools/spigot-1.9.4.jar</systemPath>
+            <groupId>org.spigotmc</groupId>
+            <artifactId>spigot-api</artifactId>
+            <version>1.19.4-R0.1-SNAPSHOT</version>
+            <scope>provided</scope>
         </dependency>
     </dependencies>
 
@@ -54,9 +62,9 @@
                 <configuration>
                     <verbose>true</verbose>
                     <fork>true</fork>
-                    <compilerVersion>1.6</compilerVersion>
-                    <source>1.6</source>
-                    <target>1.6</target>
+                    <compilerVersion>1.7</compilerVersion>
+                    <source>1.7</source>
+                    <target>1.7</target>
                 </configuration>
             </plugin>
         </plugins>
