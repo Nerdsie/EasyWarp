@@ -78,7 +78,7 @@ signs-require-permissions: false
 # It is recommended you leave this 'false'
 signs-per-warp-permissions: false
 
-# If set to true, a person bypasses any warp delay if the have permissions for 'easywarp.delay.bypass'
+# If set to true, a person bypasses any warp delay if they have permissions for 'easywarp.delay.bypass'
 permissions-bypass-delay: false
 
 # If set to true, a person bypasses any warp delay if they are ops.
