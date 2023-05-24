@@ -67,6 +67,20 @@ messages:
 #============================================================================================================================#
 #============================================================================================================================#
 
+#If set to true, players need permission or OP to use the /warp command
+warp-requires-permissions: false
+
+#If set to true, players need permission or OP to use the /listwarps command
+listwarps-requires-permissions: false
+
+#If set to true, players need permission or OP to use the /set-warp command
+setwarp-requires-permissions: true
+
+#If set to true, players need permission or OP to use the /del-warp command
+delwarp-requires-permissions: true
+
+#If set to true, players need permission or OP to use the /warp command on others
+warp-others-requires-permissions: true
 
 # If set to true, a person needs permissions for 'easywarp.warp.<warpname>' to use a warp or 'easywarp.warp.*' to use all warps.
 per-warp-permissions: false
