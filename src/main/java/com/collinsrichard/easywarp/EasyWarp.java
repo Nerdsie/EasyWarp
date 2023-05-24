@@ -16,9 +16,9 @@ public class EasyWarp extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new EWListener(this), this);
 
         try {
-            Metrics metrics = new Metrics(this);
-            metrics.start();
-        } catch (IOException e) {
+            Metrics metrics = new Metrics(this, 6045);
+        } catch (Exception e) {
+            System.out.println("[EasyWarp] Failed to start Metrics.");
         }
 
         saveDefaultConfig();
