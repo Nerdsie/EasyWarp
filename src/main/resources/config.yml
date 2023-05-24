@@ -6,7 +6,7 @@
 # ex. [server-name] You have been warped.
 server-name: "&3[&6EasyWarp&3]"
 
-# Delay (in seconds) before a person is warped.
+# Delay (in seconds) before a person is warped. (0 for no delay)
 warp-delay: 10
 
 
