@@ -49,7 +49,7 @@ messages:
     no-warp-given:
     - "&cError: /warp <warp> || /warp <player> <warp>"
     - "&c -> To list available warps, use /warps"
-    no-permission: "$cError: You need the '{node}' permission node to do this."
+    no-permission: "&cError: You need the '{node}' permission node to do this."
     no-page: "&cError: /{command} <page #>"
     no-player: "&cError: Player not found."
     not-player: "&cError: You must be a player to do this."
