@@ -35,7 +35,7 @@ public class SetWarpCommand implements CommandExecutor {
         }
 
         String perms = "easywarp.command.setwarp";
-        if (!sender.hasPermission(perms)) {
+        if (Settings.setWarpRequiresPerms && !sender.hasPermission(perms)) {
             HashMap<String, String> values = new HashMap<String, String>();
             values.put("node", perms);
 

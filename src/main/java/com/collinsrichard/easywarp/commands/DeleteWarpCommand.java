@@ -27,9 +27,9 @@ public class DeleteWarpCommand implements CommandExecutor {
                 return true;
             }
 
-            if (!sender.hasPermission(perms)) {
+            if (Settings.deleteWarpRequiresPerms && !sender.hasPermission(perms)) {
                 HashMap<String, String> values = new HashMap<String, String>();
-                values.put("node", "perms");
+                values.put("node", perms);
 
                 Helper.sendParsedMessage(sender, Settings.getMessage("error.no-permission"), values);
                 return true;

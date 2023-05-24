@@ -15,7 +15,7 @@ public class ListWarpsCommand implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command cmd, String label, String args[]) {
         String perms = "easywarp.command.listwarps";
 
-        if (!sender.hasPermission(perms)) {
+        if (Settings.listWarpsRequiresPerms && !sender.hasPermission(perms)) {
             HashMap<String, String> values = new HashMap<String, String>();
             values.put("node", perms);
 
