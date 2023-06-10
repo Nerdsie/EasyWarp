@@ -59,6 +59,7 @@ public class EWListener implements Listener {
                 Sign sign = (Sign) e.getClickedBlock().getState();
 
                 if (match(sign.getLine(0), new String[]{"[WARP]"})) {
+                    e.setCancelled(true);
 
                     String warpN = ChatColor.stripColor(sign.getLine(1));
 
