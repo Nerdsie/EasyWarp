@@ -15,7 +15,7 @@
 
     <groupId>com.collinsrichard</groupId>
     <artifactId>easywarp</artifactId>
-    <version>3.13</version>
+    <version>3.14</version>
     <packaging>jar</packaging>
 
     <repositories>
@@ -39,7 +39,7 @@
     <build>
         <defaultGoal>install</defaultGoal>
         <directory>${project.basedir}/target</directory>
-        <finalName>${project.name} v${project.version}</finalName>
+        <finalName>${project.name}</finalName>
 
         <!-- Include .yml files -->
         <resources>

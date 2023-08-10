@@ -1,6 +1,7 @@
 package com.collinsrichard.easywarp;
 
 import com.collinsrichard.easywarp.objects.Warp;
+import com.collinsrichard.easywarp.objects.WarpCountdownTimer;
 import com.collinsrichard.easywarp.objects.WarpTimer;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -91,8 +92,14 @@ public class Helper {
             stopWarping(player);
         }
 
-        WarpTimer warpTimer = new WarpTimer(player, to);
-        warpTimer.id = Bukkit.getScheduler().scheduleSyncDelayedTask(getPlugin(), warpTimer, 20L * Settings.delay);
+        WarpTimer warpTimer;
+        if(Settings.displayCountdown){
+            warpTimer = new WarpCountdownTimer(player, to, Settings.delay);
+            warpTimer.id = Bukkit.getScheduler().scheduleSyncRepeatingTask(getPlugin(), warpTimer, 20L, 20L);
+        }else{
+            warpTimer = new WarpTimer(player, to);
+            warpTimer.id = Bukkit.getScheduler().scheduleSyncDelayedTask(getPlugin(), warpTimer, 20L * Settings.delay);
+        }
 
         if (!to.getLocation().getChunk().isLoaded()) {
             to.getLocation().getChunk().load();

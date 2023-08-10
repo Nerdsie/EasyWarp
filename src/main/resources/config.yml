@@ -9,6 +9,9 @@ server-name: "&3[&6EasyWarp&3]"
 # Delay (in seconds) before a person is warped. (0 for no delay)
 warp-delay: 10
 
+# If enabled, displays a countdown when waiting to warp.
+display-countdown: false
+
 
 #============================================================================================================================#
 #============================================================================================================================#
@@ -38,6 +41,7 @@ messages:
     removed: "{server}&a The warp &c{warp} &ahas been removed."
     set: "{server}&a The warp &c{warp} &ahas been set."
     list: "{server}&a Available Warps&c ({page}/{pages})"
+    countdown: "{server}&a You will be warped in &c{time}&a seconds."
     no-permission:
     - "&cError: You do not have permission to use this warp."
     - "&c -> To list available warps, use /warps"

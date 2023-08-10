@@ -1,13 +1,9 @@
 package com.collinsrichard.easywarp;
 
-import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.Plugin;
 
-import java.io.File;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Set;
 import java.util.logging.Level;
 
 public class Settings {
@@ -25,6 +21,7 @@ public class Settings {
     public static boolean setWarpRequiresPerms = true;
     public static boolean deleteWarpRequiresPerms = true;
     public static boolean warpOtherRequiresPerms = true;
+    public static boolean displayCountdown = false;
 
     public static String prefix = "&3[&6EasyWarp&3]";
 
@@ -36,6 +33,7 @@ public class Settings {
         try {
             Settings.prefix = plugin.getConfig().getString("server-name");
             Settings.delay = plugin.getConfig().getInt("warp-delay");
+            Settings.displayCountdown = plugin.getConfig().getBoolean("display-countdown");
             Settings.warpRequiresPerms = plugin.getConfig().getBoolean("warp-requires-permissions", true);
             Settings.listWarpsRequiresPerms = plugin.getConfig().getBoolean("listwarps-requires-permissions", true);
             Settings.setWarpRequiresPerms = plugin.getConfig().getBoolean("setwarp-requires-permissions", true);
@@ -61,14 +59,13 @@ public class Settings {
 
         List<String> toReturn = plugin.getConfig().getStringList("messages." + search);
 
-        if (toReturn == null || toReturn.isEmpty()) {
-            toReturn = new ArrayList<String>();
-            String add = plugin.getConfig().getString("messages." + search);
-            if (add != null) {
-                toReturn.add(add);
-            } else {
-                toReturn.add("");
-            }
+        if (!toReturn.isEmpty()) return toReturn;
+
+        String add = plugin.getConfig().getString("messages." + search);
+        if (add != null) {
+            toReturn.add(add);
+        } else {
+            toReturn.add("");
         }
 
         return toReturn;
