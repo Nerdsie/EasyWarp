@@ -9,6 +9,9 @@ server-name: "&3[&6EasyWarp&3]"
 # Delay (in seconds) before a person is warped. (0 for no delay)
 warp-delay: 10
 
+# Delay (in seconds) before a person can warp again. (0 for no delay)
+warp-cooldown: 0
+
 # If enabled, displays a countdown when waiting to warp.
 display-countdown: false
 
@@ -42,6 +45,7 @@ messages:
     set: "{server}&a The warp &c{warp} &ahas been set."
     list: "{server}&a Available Warps&c ({page}/{pages})"
     countdown: "{server}&a You will be warped in &c{time}&a seconds."
+    cooldown: "{server}&a You must wait &c{time}&a before warping again."
     no-permission:
     - "&cError: You do not have permission to use this warp."
     - "&c -> To list available warps, use /warps"
@@ -107,6 +111,9 @@ warp-other-bypass-delay: true
 
 # If set to true, when warping using a sign the player will bypass the delay
 signs-bypass-delay: true
+
+# If set to true, when warping using a sign the player will bypass the cooldown
+signs-bypass-cooldown: false
 
 # If set to false, you will receive an error when trying to /setwarp an existing warp
 allow-warp-overwrite: false
