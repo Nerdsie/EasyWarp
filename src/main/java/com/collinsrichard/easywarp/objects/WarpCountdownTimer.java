@@ -9,8 +9,8 @@ import java.util.HashMap;
 public class WarpCountdownTimer extends WarpTimer{
 	public int secondsRemaining = 0;
 
-	public WarpCountdownTimer(Player p, Warp w, int seconds) {
-		super(p, w);
+	public WarpCountdownTimer(Player p, Warp w, int seconds, boolean triggerCooldown) {
+		super(p, w, triggerCooldown);
 		secondsRemaining = seconds;
 	}
 
