@@ -8,6 +8,7 @@ import java.util.logging.Level;
 
 public class Settings {
     public static int delay = 0;
+    public static int cooldown = 0;
     public static boolean perWarpPerms = false;
     public static boolean signsReqPerms = false;
     public static boolean signsPerWarpPerms = false;
@@ -15,6 +16,7 @@ public class Settings {
     public static boolean opsBypassDelay = false;
     public static boolean warpOtherBypassDelay = false;
     public static boolean signsBypassDelay = false;
+    public static boolean signsBypassCooldown = false;
     public static boolean canOverwrite = false;
     public static boolean warpRequiresPerms = true;
     public static boolean listWarpsRequiresPerms = true;
@@ -33,6 +35,7 @@ public class Settings {
         try {
             Settings.prefix = plugin.getConfig().getString("server-name");
             Settings.delay = plugin.getConfig().getInt("warp-delay");
+            Settings.cooldown = plugin.getConfig().getInt("warp-cooldown");
             Settings.displayCountdown = plugin.getConfig().getBoolean("display-countdown");
             Settings.warpRequiresPerms = plugin.getConfig().getBoolean("warp-requires-permissions", true);
             Settings.listWarpsRequiresPerms = plugin.getConfig().getBoolean("listwarps-requires-permissions", true);
@@ -46,6 +49,7 @@ public class Settings {
             Settings.opsBypassDelay = plugin.getConfig().getBoolean("ops-bypass-delay");
             Settings.warpOtherBypassDelay = plugin.getConfig().getBoolean("warp-other-bypass-delay");
             Settings.signsBypassDelay = plugin.getConfig().getBoolean("signs-bypass-delay");
+            Settings.signsBypassCooldown = plugin.getConfig().getBoolean("signs-bypass-cooldown");
             Settings.canOverwrite = plugin.getConfig().getBoolean("allow-warp-overwrite");
 
         } catch (Exception e) {
