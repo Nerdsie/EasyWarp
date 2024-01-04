@@ -2,6 +2,7 @@ package com.collinsrichard.easywarp.commands;
 
 import com.collinsrichard.easywarp.Helper;
 import com.collinsrichard.easywarp.Settings;
+import com.collinsrichard.easywarp.managers.CooldownManager;
 import com.collinsrichard.easywarp.managers.WarpManager;
 import com.collinsrichard.easywarp.objects.Warp;
 import org.bukkit.Bukkit;
@@ -88,6 +89,15 @@ public class WarpCommand implements CommandExecutor {
                 return true;
             }
 
+            String cooldownString = CooldownManager.getCooldownString((Player) sender);
+            if(cooldownString != null && !cooldownString.isEmpty()){
+                HashMap<String, String> values = new HashMap<String, String>();
+                values.put("time", CooldownManager.getCooldownString((Player) sender));
+
+                Helper.sendParsedMessage(sender, Settings.getMessage("warp.cooldown"), values);
+                return true;
+            }
+
             target = (Player) sender;
         }
 
@@ -102,6 +112,7 @@ public class WarpCommand implements CommandExecutor {
 
             Helper.warpOther(target, to);
         } else {
+            CooldownManager.setCooldown(target, Settings.cooldown);
             Helper.warpSelf(target, to);
         }
 
