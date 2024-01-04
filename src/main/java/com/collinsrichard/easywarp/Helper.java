@@ -1,5 +1,6 @@
 package com.collinsrichard.easywarp;
 
+import com.collinsrichard.easywarp.managers.CooldownManager;
 import com.collinsrichard.easywarp.objects.Warp;
 import com.collinsrichard.easywarp.objects.WarpCountdownTimer;
 import com.collinsrichard.easywarp.objects.WarpTimer;
@@ -47,22 +48,27 @@ public class Helper {
     }
 
     public static void warpSelf(Player player, Warp to) {
-        if (Settings.delay == 0 || (Settings.opsBypassDelay && player.isOp()) || (Settings.permsBypassDelay && player.hasPermission("easywarp.delay.bypass"))) {
+        if (Settings.delay == 0 || playerBypassesDelays(player)) {
             warp(player, to);
+            CooldownManager.setCooldown(player, Settings.cooldown);
             return;
         }
 
-        delayedTeleport(player, to);
+        delayedTeleport(player, to, true);
+    }
+
+    public static boolean playerBypassesDelays(Player player) {
+        return (Settings.opsBypassDelay && player.isOp()) || (Settings.permsBypassDelay && player.hasPermission("easywarp.delay.bypass"));
     }
 
     public static void warpSign(Player player, Warp to) {
-        if (Settings.delay == 0 || (Settings.opsBypassDelay && player.isOp()) || (Settings.permsBypassDelay && player.hasPermission("easywarp.delay.bypass")) || (Settings.signsBypassDelay)) {
+        if (Settings.delay == 0 || playerBypassesDelays(player) || (Settings.signsBypassDelay)) {
 
             warp(player, to);
             return;
         }
 
-        delayedTeleport(player, to);
+        delayedTeleport(player, to, false);
     }
 
     public static void warp(Player player, Warp to) {
@@ -82,7 +88,7 @@ public class Helper {
         player.teleport(to.getLocation());
     }
 
-    public static void delayedTeleport(Player player, Warp to) {
+    public static void delayedTeleport(Player player, Warp to, boolean triggerCooldown) {
         HashMap<String, String> values = new HashMap<String, String>();
         values.put("warp", to.getName());
 
@@ -94,10 +100,10 @@ public class Helper {
 
         WarpTimer warpTimer;
         if(Settings.displayCountdown){
-            warpTimer = new WarpCountdownTimer(player, to, Settings.delay);
+            warpTimer = new WarpCountdownTimer(player, to, Settings.delay, triggerCooldown);
             warpTimer.id = Bukkit.getScheduler().scheduleSyncRepeatingTask(getPlugin(), warpTimer, 20L, 20L);
         }else{
-            warpTimer = new WarpTimer(player, to);
+            warpTimer = new WarpTimer(player, to, triggerCooldown);
             warpTimer.id = Bukkit.getScheduler().scheduleSyncDelayedTask(getPlugin(), warpTimer, 20L * Settings.delay);
         }
 
