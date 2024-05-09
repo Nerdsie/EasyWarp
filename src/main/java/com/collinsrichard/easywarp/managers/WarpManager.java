@@ -6,18 +6,16 @@ import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
+import java.util.*;
 import java.util.logging.Level;
 
 public class WarpManager {
     private static HashMap<String, Warp> warps = new HashMap<String, Warp>();
 
-    public static void addWarp(String name, Location location) {
-        addWarp(new Warp(name, location));
+    public static void addWarp(String name, Location location, Player owner) {
+        addWarp(new Warp(name, location, owner.getUniqueId()));
     }
 
     public static void addWarp(Warp warp) {
@@ -58,6 +56,7 @@ public class WarpManager {
         String zS = args[4];
         String pitchS = args[5];
         String yawS = args[6];
+        String ownerUUID = args[7];
 
         try {
             World world = Bukkit.getWorld(worldS);
@@ -69,7 +68,7 @@ public class WarpManager {
 
             Location loc = new Location(world, x, y, z, yaw, pitch);
 
-            return new Warp(name, loc);
+            return new Warp(name, loc, UUID.fromString(ownerUUID));
         } catch (Exception e) {
             Bukkit.getLogger().log(Level.WARNING, "Error parsing warp '" + name + "'");
             return null;

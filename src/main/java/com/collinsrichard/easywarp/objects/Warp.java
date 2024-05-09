@@ -2,27 +2,24 @@ package com.collinsrichard.easywarp.objects;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
+import org.bukkit.entity.Player;
+
+import java.util.UUID;
 
 public class Warp {
 	private String name = "";
 	private String worldName = "";
 	private double x = 0, y = 0, z = 0;
 	private float pitch = 0F, yaw = 0F;
+	private UUID owner = null;
 
-	public Warp(String n, Location l) {
+	public Warp(String n, Location l, UUID owner) {
 		setName(n);
 		setLocation(l);
+		setOwner(owner);
 	}
 
-	public Warp (String n, String world, double xx, double yy, double zz){
-		setName(n);
-		worldName = world;
-		x = xx;
-		y = yy;
-		z = zz;
-	}
-
-	public Warp (String n, String world, double xx, double yy, double zz, float yyaw, float ppitch){
+	public Warp (String n, String world, double xx, double yy, double zz, float yyaw, float ppitch, UUID owner){
 		setName(n);
 		worldName = world;
 		x = xx;
@@ -30,10 +27,15 @@ public class Warp {
 		z = zz;
 		yaw = yyaw;
 		pitch = ppitch;
+		setOwner(owner);
 	}
 
 	public void setName(String s) {
 		name = s;
+	}
+
+	public void setOwner(UUID p) {
+		owner = p;
 	}
 
 	public void setLocation(Location l) {
@@ -49,6 +51,14 @@ public class Warp {
 		return name;
 	}
 
+	public UUID getOwner() { return owner; }
+
+	public boolean isOwner(Player p) {
+		if(owner == null)
+			return false;
+		return owner.equals(p.getUniqueId());
+	}
+
 	public Location getLocation() {
 		return new Location(Bukkit.getWorld(worldName), x, y, z, yaw, pitch);
 	}
@@ -62,6 +72,7 @@ public class Warp {
 		String z = getLocation().getZ() + "";
 		String pitch = getLocation().getPitch() + "";
 		String yaw = getLocation().getYaw() + "";
+		String ownerUUID = owner.toString();
 
 		sb.append(world + ",");
 		sb.append(x + ",");
@@ -69,6 +80,7 @@ public class Warp {
 		sb.append(z + ",");
 		sb.append(pitch + ",");
 		sb.append(yaw + ",");
+		sb.append(ownerUUID + ",");
 
 		return sb.toString();
 	}

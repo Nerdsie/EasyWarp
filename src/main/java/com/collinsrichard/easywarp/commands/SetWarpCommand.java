@@ -55,7 +55,7 @@ public class SetWarpCommand implements CommandExecutor {
             return true;
         }
 
-        WarpManager.addWarp(warpName, player.getLocation());
+        WarpManager.addWarp(warpName, player.getLocation(), player);
         EasyWarp.fileManager.saveWarps();
 
         Helper.sendParsedMessage(player, Settings.getMessage("warp.set"), values);

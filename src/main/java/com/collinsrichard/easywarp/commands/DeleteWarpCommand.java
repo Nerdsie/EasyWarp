@@ -7,9 +7,11 @@ import com.collinsrichard.easywarp.managers.FileManager;
 import com.collinsrichard.easywarp.managers.WarpManager;
 import com.collinsrichard.easywarp.objects.Warp;
 import org.bukkit.ChatColor;
+import org.bukkit.Color;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
 
 import java.util.HashMap;
 
@@ -19,7 +21,9 @@ public class DeleteWarpCommand implements CommandExecutor {
         String perms = "easywarp.command.delwarp";
 
         if (cmd.getName().equalsIgnoreCase("delwarp")) {
-            if (!WarpManager.isWarp(args[0])) {
+            Warp remove = WarpManager.getWarp(args[0]);
+
+            if (remove == null) {
                 HashMap<String, String> values = new HashMap<String, String>();
                 values.put("info", "");
 
@@ -35,7 +39,19 @@ public class DeleteWarpCommand implements CommandExecutor {
                 return true;
             }
 
-            Warp remove = WarpManager.getWarp(args[0]);
+            if(sender instanceof Player) {
+                Player player = (Player) sender;
+
+                String permOther = perms + ".others";
+                if(Settings.deleteWarpRequiresPerms && !remove.isOwner(player) && !player.hasPermission(permOther)) {
+                    HashMap<String, String> values = new HashMap<String, String>();
+                    values.put("node", permOther);
+
+                    sender.sendMessage(ChatColor.RED + "Error: You are trying to delete a warp created by another player.");
+                    Helper.sendParsedMessage(sender, Settings.getMessage("error.no-permission"), values);
+                    return true;
+                }
+            }
 
             HashMap<String, String> values = new HashMap<String, String>();
             values.put("warp", remove.getName());

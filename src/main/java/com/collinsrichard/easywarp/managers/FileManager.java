@@ -11,6 +11,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.util.ArrayList;
+import java.util.UUID;
 
 public class FileManager {
     private FileConfiguration warpConfig = null;
@@ -66,6 +67,9 @@ public class FileManager {
 
             warpConfig.set("warps." + warp.getName() + ".yaw", warp.getLocation().getYaw());
             warpConfig.set("warps." + warp.getName() + ".pitch", warp.getLocation().getPitch());
+            if(warp.getOwner() != null) {
+                warpConfig.set("warps." + warp.getName() + ".owner", warp.getOwner().toString());
+            }
         }
 
         try {
@@ -91,6 +95,7 @@ public class FileManager {
             double y = warpConfig.getDouble("warps." + name + ".y");
             double z = warpConfig.getDouble("warps." + name + ".z");
             Float yaw = 0F, pitch = 0F;
+            UUID owner = null;
 
             if (warpConfig.contains("warps." + name + ".yaw")) {
                 yaw = Float.parseFloat(warpConfig.getString("warps." + name + ".yaw"));
@@ -100,7 +105,11 @@ public class FileManager {
                 pitch = Float.parseFloat(warpConfig.getString("warps." + name + ".pitch"));
             }
 
-            Warp warp = new Warp(name, worldName, x, y, z, yaw, pitch);
+            if (warpConfig.contains("warps." + name + ".owner")) {
+                owner = UUID.fromString(warpConfig.getString("warps." + name + ".owner"));
+            }
+
+            Warp warp = new Warp(name, worldName, x, y, z, yaw, pitch, owner);
             WarpManager.addWarp(warp);
         }
     }
