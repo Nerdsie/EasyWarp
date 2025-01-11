@@ -4,8 +4,6 @@ import com.collinsrichard.easywarp.commands.*;
 import com.collinsrichard.easywarp.managers.FileManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import java.io.IOException;
-
 public class EasyWarp extends JavaPlugin {
     public static String name = "";
     public static FileManager fileManager;
@@ -14,12 +12,6 @@ public class EasyWarp extends JavaPlugin {
         name = this.getName();
 
         getServer().getPluginManager().registerEvents(new EWListener(this), this);
-
-        try {
-            Metrics metrics = new Metrics(this, 6045);
-        } catch (Exception e) {
-            System.out.println("[EasyWarp] Failed to start Metrics.");
-        }
 
         saveDefaultConfig();
         reloadConfig();
